@@ -1,5 +1,25 @@
 <router-outlet></router-outlet>
+<div class="page-container">
+  <div class="title">URL Preview</div>
+  <input class="textbox" type="text" [(ngModel)]="url" (ngModelChange)="urlFetch()" placeholder="Type any url here for preview...">
+  <br><br>
+  <div class="preview-box" *ngIf="response">
+    <img class="image" src="{{ response['og:image'] || response['twitter:image'] }}">
+    <div class="text-box">
+      <div class="sitename mb-5">
+        {{ response['og:site_name'] }}
+        <span class="timeago">{{ response?.timeago }}</span>
+      </div>
+      <div class="title-desc-box">
+        <a href="{{ response['og:url'] || response['twitter:url'] }}" target="_blank">
+          <div class="sitetitle mb-5">{{ response['og:title'] || response['twitter:title'] || response['title'] }}</div>
+        </a>
+        <div class="sitedesc">{{ response['og:description'] || response['twitter:description'] || response['description'] }}</div>
+      </div>
+    </div>
+  </div>
+</div>
 
-<input type="text" [(ngModel)]="url" (ngModelChange)="urlFetch()">
 
-<pre>{{ response | json }}</pre>
+<!-- <pre>{{ response | json }}</pre> -->
+<!-- <pre>{{ allData | json }}</pre> -->
