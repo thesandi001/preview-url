@@ -19,6 +19,7 @@ export class AppComponent {
   urlFetch() {
   	this.response = undefined;
   	urlPreview(this.url).then(data => {
+			console.log(data);
   		this.response = data;
   		if(this.response['article:modified_time']) {
   			this.response.timeago = this.timeago(this.response['article:modified_time']);

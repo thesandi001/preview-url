@@ -1,8 +1,10 @@
 <router-outlet></router-outlet>
+
 <div class="page-container">
   <div class="title">URL Preview</div>
   <input class="textbox" type="text" [(ngModel)]="url" (ngModelChange)="urlFetch()" placeholder="Type any url here for preview...">
   <br><br>
+<!--   
   <div class="preview-box" *ngIf="response">
     <img class="image" src="{{ response['og:image'] || response['twitter:image'] }}">
     <div class="text-box">
@@ -18,6 +20,28 @@
       </div>
     </div>
   </div>
+
+  <br><br> -->
+
+  <div *ngFor="let response of allData">
+
+    <div class="preview-box-small" *ngIf="response">
+      <div class="left">
+        <img class="image" src="{{ response['og:image'] || response['twitter:image'] }}">
+      </div>
+      <div class="right">
+        <span class="timeago">{{ response?.timeago }}&nbsp;&nbsp;&nbsp;</span>
+        <span class="sitename">{{ response['og:site_name'] }}</span>
+        <a href="{{ response['og:url'] || response['twitter:url'] }}" target="_blank">
+          <div class="sitetitle mb-5">{{ response['og:title'] || response['twitter:title'] || response['title'] }}</div>
+        </a>
+        <div class="sitedesc">{{ response['og:description'] || response['twitter:description'] || response['description'] }}</div>
+      </div>
+      <div class="clearall"></div>
+    </div>
+
+  </div>
+
 </div>
 
 
